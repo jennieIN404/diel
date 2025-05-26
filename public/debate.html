@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com http://localhost:5000/socket.io/socket.io.js https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Dialectica - Debate Room</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .time-up-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .time-up-container.show {
+            opacity: 1;
+        }
+        
+        .time-up-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            animation: pulse 1.5s infinite alternate;
+            max-width: 400px;
+            width: 80%;
+        }
+        
+        .time-up-icon {
+            font-size: 4rem;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        
+        .time-up-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 10px;
+            animation: shake 0.5s ease-in-out 0.2s;
+        }
+        
+        .time-up-name {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .debate-container {
+            height: calc(100vh - 76px);
+            padding-top: 76px;
+        }
+        
+        .participants-panel {
+            height: 100%;
+            border-right: 1px solid #dee2e6;
+            overflow-y: auto;
+        }
+        
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .debate-header {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+        }
+        
+        .messages-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        
+        .message-input {
+            padding: 15px;
+            border-top: 1px solid #dee2e6;
+            background-color: white;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 85%;
+        }
+        
+        .message-content {
+            padding: 10px 15px;
+            border-radius: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .message-info {
+            font-size: 0.8rem;
+            margin-bottom: 2px;
+        }
+        
+        .message.self {
+            margin-left: auto;
+        }
+        
+        .message.self .message-content {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .message.other .message-content {
+            background-color: #e9e9e9;
+        }
+        
+        .message.system .message-content {
+            background-color: #f1f1f1;
+            color: #666;
+            font-style: italic;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .debate-controls {
+            padding: 15px;
+            border-top: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+        }
+        
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .participant-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .participant-item.active {
+            background-color: #e7f1ff;
+        }
+        
+        .participant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .participant-info {
+            flex-grow: 1;
+        }
+        
+        .participant-role {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .login-container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <div id="roomInfo" class="ms-auto me-3">
+                <span class="badge bg-primary">Room: <span id="roomName">-</span></span>
+            </div>
+            <button id="leaveRoom" class="btn btn-outline-danger btn-sm">
+                <i class="fas fa-sign-out-alt"></i> Leave
+            </button>
+        </div>
+    </nav>
+
+    <div id="loginForm" class="login-container">
+        <h2 class="text-center mb-4">Join Debate Room</h2>
+        <form id="joinRoomForm">
+            <div class="mb-3">
+                <label for="username" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="roomId" class="form-label">Room ID</label>
+                <input type="number" class="form-control" id="roomId" required>
+                <div class="form-text">Enter an existing room ID or create a new one (numbers only).</div>
+            </div>
+            <div class="mb-3" id="debateTitleContainer" style="display: none;">
+                <label for="debateTitle" class="form-label">Debate Title</label>
+                <input type="text" class="form-control" id="debateTitle" placeholder="Enter a title for this debate">
+                <div class="form-text">This will be displayed as the debate topic.</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" id="roleDebater" value="debater" checked>
+                    <label class="form-check-label" for="roleDebater">
+                        Debater
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" id="roleModerator" value="moderator">
+                    <label class="form-check-label" for="roleModerator">
+                        Moderator
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" id="roleSpectator" value="spectator">
+                    <label class="form-check-label" for="roleSpectator">
+                        Spectator
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Join Room</button>
+        </form>
+    </div>
+
+    <div id="timeUpAnimation" class="time-up-container" style="display: none;">
+        <div class="time-up-content">
+            <div class="time-up-icon">
+                <i class="fas fa-stopwatch fa-bounce"></i>
+            </div>
+            <h2 class="time-up-text">TIME'S UP!</h2>
+            <div id="timeUpDebaterName" class="time-up-name"></div>
+        </div>
+    </div>
+
+    <div id="debateRoom" class="debate-container" style="display: none;">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                
+                <div class="col-md-3 participants-panel">
+                    <h5 class="p-3 border-bottom">Participants</h5>
+                    <div id="participantsList"></div>
+                </div>
+                
+                <div class="col-md-9 h-100 p-0">
+                    <div class="chat-panel">
+                        
+                        <div class="debate-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h5 class="mb-0">Debate: <span id="debateTopic">General Discussion</span></h5>
+                                </div>
+                                <div class="col-auto" id="timerContainer">
+                                    <span id="timerDisplay" class="badge bg-secondary">00:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="messagesContainer" class="messages-container"></div>
+                        
+                        <div class="message-input">
+                            <form id="messageForm">
+                                <div class="input-group">
+                                    <input type="text" id="messageInput" class="form-control" placeholder="Type your message..." autocomplete="off">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="d-flex align-items-center mt-2">
+                                <button id="toggleMicBtn" class="btn btn-outline-secondary me-2" title="Toggle Microphone">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <span id="micStatus" class="badge bg-secondary">Mic Off</span>
+                                <div id="audioIndicator" class="ms-2" style="display: none;">
+                                    <i class="fas fa-broadcast-tower text-success"></i>
+                                    <small class="text-muted ms-1">Speaking...</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="moderatorControls" class="debate-controls" style="display: none;">
+                            <h6>Moderator Controls</h6>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <select id="activeDebaterSelect" class="form-select">
+                                        <option value="">Select Debater</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="timeLimit" class="form-select">
+                                        <option value="60">1 minute</option>
+                                        <option value="120">2 minutes</option>
+                                        <option value="180">3 minutes</option>
+                                        <option value="300" selected>5 minutes</option>
+                                        <option value="600">10 minutes</option>
+                                        <option value="900">15 minutes</option>
+                                        <option value="1200">20 minutes</option>
+                                        <option value="1800">30 minutes</option>
+                                        <option value="custom">Custom time</option>
+                                    </select>
+                                </div>
+                                <div id="customTimeContainer" class="col-md-3" style="display: none;">
+                                    <div class="input-group">
+                                        <input type="number" id="customTimeInput" class="form-control" min="1" value="10" aria-label="Custom time in minutes">
+                                        <span class="input-group-text">min</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <button id="startDebateBtn" class="btn btn-success me-2">
+                                        <i class="fas fa-play"></i> Start
+                                    </button>
+                                    <button id="pauseDebateBtn" class="btn btn-warning me-2">
+                                        <i class="fas fa-pause"></i> Pause
+                                    </button>
+                                    <button id="endDebateBtn" class="btn btn-danger">
+                                        <i class="fas fa-stop"></i> End
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io-stream/0.9.1/socket.io-stream.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/debate.js"></script>
+</body>
+</html>

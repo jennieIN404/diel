@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com; frame-src 'self' https://www.google.com https://*.google.com;">
+    <title>Help Center - Dialectica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            height: 200px;
+        }
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .play-button i {
+            color: white;
+            font-size: 24px;
+        }
+        .video-card:hover .play-button {
+            background-color: #0d6efd;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1>Help Center</h1>
+                    <p class="lead">Find answers to your questions and learn how to get the most out of Dialectica.</p>
+                    
+                    <div class="search-container mt-4">
+                        <form class="help-search-form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for help articles..." aria-label="Search">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="help-categories py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Browse by Category</h2>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Getting Started</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Creating your account</a></li>
+                            <li><a href="#">Setting up your first debate</a></li>
+                            <li><a href="#">Inviting participants</a></li>
+                            <li><a href="#">Understanding debate formats</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Platform Features</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Using speech-to-text</a></li>
+                            <li><a href="#">Timer and notifications</a></li>
+                            <li><a href="#">Judge panel functionality</a></li>
+                            <li><a href="#">Audience participation tools</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Account Management</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Updating your profile</a></li>
+                            <li><a href="#">Managing subscriptions</a></li>
+                            <li><a href="#">Team member access</a></li>
+                            <li><a href="#">Security settings</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>For Educators</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Classroom integration</a></li>
+                            <li><a href="#">Student management</a></li>
+                            <li><a href="#">Debate assessment tools</a></li>
+                            <li><a href="#">Educational resources</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Tournaments & Events</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Setting up tournaments</a></li>
+                            <li><a href="#">Bracket management</a></li>
+                            <li><a href="#">Judging workflows</a></li>
+                            <li><a href="#">Results and analytics</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Troubleshooting</h3>
+                        <ul class="category-links">
+                            <li><a href="#">Audio/video issues</a></li>
+                            <li><a href="#">Connection problems</a></li>
+                            <li><a href="#">Speech recognition fixes</a></li>
+                            <li><a href="#">Common error messages</a></li>
+                            <li><a href="#">View all articles <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="popular-articles py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Popular Articles</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="article-list">
+                        <div class="article-item">
+                            <div class="article-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <h4><a href="#">How to set up your first debate room</a></h4>
+                                <p>Learn how to create and configure a debate room for your first session.</p>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <div class="article-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <h4><a href="#">Troubleshooting microphone issues</a></h4>
+                                <p>Solutions for common audio problems during debates.</p>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <div class="article-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <h4><a href="#">Using the judge scoring system</a></h4>
+                                <p>A comprehensive guide to the judging interface and scoring rubrics.</p>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <div class="article-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <h4><a href="#">Exporting debate transcripts</a></h4>
+                                <p>How to download and share debate recordings and transcripts.</p>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <div class="article-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <h4><a href="#">Managing team permissions</a></h4>
+                                <p>Configure access levels for different team members in your organization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="video-tutorials py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Video Tutorials</h2>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="/cto.jpg" alt="Getting Started Tutorial" class="img-fluid">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Getting Started with Dialectica</h4>
+                            <p>A comprehensive overview of the platform's core features.</p>
+                            <span class="video-duration">5:32</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="/my photo.jpg" alt="Judge Interface Tutorial" class="img-fluid">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Mastering the Judge Interface</h4>
+                            <p>Learn how to effectively evaluate debates using our scoring system.</p>
+                            <span class="video-duration">7:15</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="/head1.jpg" alt="Tournament Setup Tutorial" class="img-fluid">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>Setting Up Tournament Brackets</h4>
+                            <p>A step-by-step guide to organizing competitive debate events.</p>
+                            <span class="video-duration">8:47</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">View All Tutorials</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-support py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2>Need More Help?</h2>
+                    <p class="lead mb-4">Our support team is ready to assist you with any questions or issues.</p>
+                    
+                    <div class="support-options">
+                        <div class="row">
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <div class="support-option">
+                                    <div class="support-icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <h4>Live Chat</h4>
+                                    <p>Chat with our AI assistant or support team in real-time.</p>
+                                    <button id="openChatBtn" class="btn btn-sm btn-outline-primary">Start Chat</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <div class="support-option">
+                                    <div class="support-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h4>Email Support</h4>
+                                    <p>Send us a detailed message and we'll respond within 24 hours.</p>
+                                    <a href="mailto:info.dialectica91@gmail.com" class="btn btn-sm btn-outline-primary">Email Us</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="support-option">
+                                    <div class="support-icon">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <h4>Phone Support</h4>
+                                    <p>Call us directly for urgent matters or complex issues.</p>
+                                    <a href="tel:+919631593615" class="btn btn-sm btn-outline-primary">Call Support</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">
+                        <div class="logo-container">
+                            <div class="logo-shape shape-1"></div>
+                            <div class="logo-shape shape-2"></div>
+                        </div>
+                        <span class="ms-2">Dialectica</span>
+                    </div>
+                    <p class="footer-tagline">Where Reason Resonates</p>
+                    <p>Dialectica is a professional debate platform designed to facilitate structured intellectual discourse in a respectful environment.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright">© 2025 Dialectica. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div id="chatContainer" class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot me-2"></i> Dialectica Assistant
+            </div>
+            <button id="closeChatBtn" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Hello! I'm the Dialectica AI assistant. How can I help you with your debate platform questions today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your message here...">
+            <button id="sendMessageBtn" class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <style>
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background-color: #0d6efd;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .send-btn {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            align-self: flex-start;
+            margin-bottom: 5px;
+        }
+        
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #666;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: typing 1s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/help.js"></script>
+</body>
+</html>

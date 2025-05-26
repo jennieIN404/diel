@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Dialectica - User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .profile-container {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        .profile-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            padding: 30px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #aaa;
+            overflow: hidden;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .avatar-upload {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .avatar-upload input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .profile-stats {
+            display: flex;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .alert-container {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="profile.html">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="debate.html">Debates</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span class="me-3 align-self-center" id="welcomeUser"></span>
+                    <button id="logoutBtn" class="btn btn-outline-danger">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="profile-card">
+                        <h2 class="mb-4">User Profile</h2>
+                        
+                        <div id="alertContainer" class="alert-container"></div>
+                        
+                        <div class="profile-header">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="profile-avatar" id="profileAvatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="avatar-upload">
+                                    <button class="btn btn-sm btn-outline-secondary" id="uploadAvatarBtn">
+                                        <i class="fas fa-camera me-1"></i> Change Photo
+                                    </button>
+                                    <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                </div>
+                            </div>
+                            
+                            <div class="ms-3">
+                                <h3 id="profileUsername">Loading...</h3>
+                                <p id="profileEmail" class="text-muted">Loading...</p>
+                            </div>
+                        </div>
+                        
+                        <form id="profileForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Bio</label>
+                                <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself"></textarea>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i> Save Changes
+                                </button>
+                                <a href="dashboard.html" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+                                </a>
+                            </div>
+                        </form>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="debatesParticipated">0</div>
+                                <div class="stat-label">Debates</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="debatesWon">0</div>
+                                <div class="stat-label">Wins</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="debatesHosted">0</div>
+                                <div class="stat-label">Hosted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

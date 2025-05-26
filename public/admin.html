@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com http://localhost:5000/socket.io/socket.io.js https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Admin Dashboard - Dialectica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-container {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+        
+        .admin-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .admin-card-header {
+            background-color: #0d6efd;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-card-body {
+            padding: 20px;
+        }
+        
+        .admin-nav {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-nav .nav-link {
+            color: #495057;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+        
+        .admin-nav .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .admin-nav .nav-link:hover:not(.active) {
+            background-color: #e9ecef;
+        }
+        
+        .user-table th, .user-table td {
+            vertical-align: middle;
+        }
+        
+        .room-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .room-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .room-header {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .room-body {
+            padding: 15px;
+        }
+        
+        .participant-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #0d6efd;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="admin.html">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin.html">Admin</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span id="adminUsername" class="me-3"></span>
+                    <button id="logoutBtn" class="btn btn-outline-danger btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="admin-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="admin-nav">
+                        <h5 class="mb-3">Admin Panel</h5>
+                        <div class="nav flex-column" id="admin-tabs" role="tablist">
+                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab">
+                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                            </a>
+                            <a class="nav-link" id="users-tab" data-bs-toggle="pill" href="#users" role="tab">
+                                <i class="fas fa-users me-2"></i> Users
+                            </a>
+                            <a class="nav-link" id="rooms-tab" data-bs-toggle="pill" href="#rooms" role="tab">
+                                <i class="fas fa-comments me-2"></i> Active Rooms
+                            </a>
+                            <a class="nav-link" id="stats-tab" data-bs-toggle="pill" href="#stats" role="tab">
+                                <i class="fas fa-chart-bar me-2"></i> Statistics
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-lg-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <span>Dashboard Overview</span>
+                                    <button id="refreshDashboard" class="btn btn-sm btn-light">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-card bg-light">
+                                                <div class="stats-icon">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                                <div id="totalUsers" class="stats-number">0</div>
+                                                <div class="stats-label">Total Users</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="stats-card bg-light">
+                                                <div class="stats-icon">
+                                                    <i class="fas fa-comments"></i>
+                                                </div>
+                                                <div id="activeRooms" class="stats-number">0</div>
+                                                <div class="stats-label">Active Rooms</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="stats-card bg-light">
+                                                <div class="stats-icon">
+                                                    <i class="fas fa-clock"></i>
+                                                </div>
+                                                <div id="totalDebates" class="stats-number">0</div>
+                                                <div class="stats-label">Total Debates</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <h5>Quick Actions</h5>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Join Active Room</h6>
+                                                        <p class="card-text small">Select from active rooms or enter a room ID</p>
+                                                        <div class="mb-2">
+                                                            <select id="activeRoomsSelect" class="form-select form-select-sm mb-2">
+                                                                <option value="">Select an active room</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <input type="number" id="quickJoinRoomId" class="form-control form-control-sm me-2" placeholder="Or enter Room ID">
+                                                            <button id="quickJoinRoomBtn" class="btn btn-sm btn-primary">Join</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">System Status</h6>
+                                                        <p class="card-text small">Server and database connection status</p>
+                                                        <div id="systemStatus" class="d-flex align-items-center">
+                                                            <span class="badge bg-success me-2">Server Online</span>
+                                                            <span class="badge bg-success">Database Connected</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="users" role="tabpanel">
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <span>User Management</span>
+                                    <button id="refreshUsers" class="btn btn-sm btn-light">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover user-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Email</th>
+                                                    <th>Role</th>
+                                                    <th>Joined</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="usersTableBody">
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <div class="spinner-border text-primary" role="status">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="rooms" role="tabpanel">
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <span>Active Debate Rooms</span>
+                                    <button id="refreshRooms" class="btn btn-sm btn-light">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div id="roomsContainer">
+                                        <div class="loading-spinner">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="stats" role="tabpanel">
+                            <div class="admin-card">
+                                <div class="admin-card-header">
+                                    <span>Platform Statistics</span>
+                                    <button id="refreshStats" class="btn btn-sm btn-light">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                </div>
+                                <div class="admin-card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    User Registration
+                                                </div>
+                                                <div class="card-body">
+                                                    <canvas id="userRegistrationChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Debate Activity
+                                                </div>
+                                                <div class="card-body">
+                                                    <canvas id="debateActivityChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Recent Platform Activity
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group" id="activityLogList">
+                                                <li class="list-group-item text-center">
+                                                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                        <span class="visually-hidden">Loading...</span>
+                                                    </div>
+                                                    Loading activity logs...
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
