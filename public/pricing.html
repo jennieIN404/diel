@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000; connect-src 'self' http://localhost:5000; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com; frame-src 'self' https://www.google.com https://*.google.com;">
+    <title>Pricing - Dialectica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Simple, Transparent Pricing</h1>
+                    <p class="lead">Choose the plan that's right for you or your organization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-toggle py-4">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center mb-4">
+                <span class="me-3 fw-bold">Monthly</span>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="billingToggle">
+                </div>
+                <span class="ms-3 fw-bold">Annual <span class="badge bg-success ms-2">Save 20%</span></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-plans pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Free</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p>Perfect for individuals just getting started</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> 3 debate rooms</li>
+                                <li><i class="fas fa-check"></i> Up to 4 participants per debate</li>
+                                <li><i class="fas fa-check"></i> Basic speech-to-text</li>
+                                <li><i class="fas fa-check"></i> Standard debate formats</li>
+                                <li><i class="fas fa-check"></i> 7-day debate history</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> No judge panel functionality</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> No custom branding</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> No analytics</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="signup.html" class="btn btn-outline-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">19</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p>For serious debaters and small teams</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Unlimited debate rooms</li>
+                                <li><i class="fas fa-check"></i> Up to 8 participants per debate</li>
+                                <li><i class="fas fa-check"></i> Advanced speech-to-text</li>
+                                <li><i class="fas fa-check"></i> All debate formats</li>
+                                <li><i class="fas fa-check"></i> 60-day debate history</li>
+                                <li><i class="fas fa-check"></i> Judge panel functionality</li>
+                                <li><i class="fas fa-check"></i> Basic analytics</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> No custom branding</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="signup.html" class="btn btn-primary w-100">Choose Pro</a>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="col-lg-4 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Enterprise</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">49</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p>For schools, organizations, and competitions</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Unlimited debate rooms</li>
+                                <li><i class="fas fa-check"></i> Up to 20 participants per debate</li>
+                                <li><i class="fas fa-check"></i> Premium speech-to-text</li>
+                                <li><i class="fas fa-check"></i> Custom debate formats</li>
+                                <li><i class="fas fa-check"></i> Unlimited debate history</li>
+                                <li><i class="fas fa-check"></i> Advanced judge panel</li>
+                                <li><i class="fas fa-check"></i> Comprehensive analytics</li>
+                                <li><i class="fas fa-check"></i> Custom branding</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="signup.html" class="btn btn-outline-primary w-100">Choose Enterprise</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="education-pricing py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2>Special Education Pricing</h2>
+                    <p class="lead">We offer special discounts for educational institutions. Contact us to learn more about our education plans.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="edu-pricing-card">
+                        <div class="edu-pricing-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h3>K-12 Schools</h3>
+                        <p>Special pricing for primary and secondary schools with classroom features and teacher controls.</p>
+                        <a href="contact.html" class="btn btn-outline-primary">Contact for Pricing</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="edu-pricing-card">
+                        <div class="edu-pricing-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Higher Education</h3>
+                        <p>Tailored solutions for colleges and universities with department-level administration.</p>
+                        <a href="contact.html" class="btn btn-outline-primary">Contact for Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="pricingFAQ">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Can I change plans at any time?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    Yes, you can upgrade or downgrade your plan at any time. Upgrades take effect immediately, while downgrades will take effect at the end of your current billing cycle.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Do you offer refunds?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    We offer a 14-day money-back guarantee for all paid plans. If you're not satisfied with our service, you can request a full refund within 14 days of your initial purchase.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and bank transfers for annual enterprise plans.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Do I need to provide payment information for the free plan?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#pricingFAQ">
+                                <div class="accordion-body">
+                                    No, you can sign up and use the free plan without providing any payment information. You'll only need to provide payment details when you decide to upgrade to a paid plan.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2>Still have questions?</h2>
+                        <p>Our team is ready to help you find the perfect plan for your needs. Contact us for personalized assistance.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                        <a href="contact.html" class="btn btn-primary me-2 mb-2">Contact Sales <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="help.html" class="btn btn-outline-light mb-2">Visit Help Center</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">
+                        <div class="logo-container">
+                            <div class="logo-shape shape-1"></div>
+                            <div class="logo-shape shape-2"></div>
+                        </div>
+                        <span class="ms-2">Dialectica</span>
+                    </div>
+                    <p class="footer-tagline">Where Reason Resonates</p>
+                    <p>Dialectica is a professional debate platform designed to facilitate structured intellectual discourse in a respectful environment.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright">© 2025 Dialectica. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/pricing.js"></script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Dialectica - User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-container {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        .dashboard-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-stats {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .recent-debates {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .debate-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--gray-light);
+            transition: background-color 0.2s ease;
+        }
+        
+        .debate-item:last-child {
+            border-bottom: none;
+        }
+        
+        .debate-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .debate-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .debate-meta {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .debate-participants {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .welcome-banner {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar-small {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            overflow: hidden;
+        }
+        
+        .profile-avatar-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/dashboard">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="debate.html">Debates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item admin-link" style="display: none;">
+                        <a class="nav-link" href="admin.html">Admin</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center" id="userProfileNav">
+                        <div class="profile-avatar-small me-2" id="navProfileAvatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <a href="profile.html" class="text-decoration-none me-3" id="welcomeUser"></a>
+                        <button id="logoutBtn" class="btn btn-outline-danger">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="container">
+            
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 id="welcomeHeader">Welcome to your Dashboard!</h2>
+                        <p>From here you can manage your debates, view statistics, and access all Dialectica features.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <a href="debate.html" class="btn btn-light">Start a New Debate</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="dashboard-stats">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" id="debatesParticipated">0</div>
+                            <div class="stat-label">Debates Participated</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" id="debatesWon">0</div>
+                            <div class="stat-label">Debates Won</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalSpeakingTime">0</div>
+                            <div class="stat-label">Total Speaking Time</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-item">
+                            <div class="stat-number" id="feedbackReceived">0</div>
+                            <div class="stat-label">Feedback Received</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-item">
+                            <div class="stat-number" id="debatesHosted">0</div>
+                            <div class="stat-label">Debates Hosted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    
+                    <div class="recent-debates">
+                        <h3 class="mb-4">Recent Debates</h3>
+                        <div id="recentDebatesList">
+                            <div class="text-center py-4 text-muted">
+                                <i class="fas fa-comments fa-3x mb-3 opacity-25"></i>
+                                <p>You haven't participated in any debates yet.</p>
+                                <a href="debate.html" class="btn btn-primary mt-2">Start Your First Debate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="card dashboard-card mb-4">
+                        <div class="card-body text-center p-4">
+                            <div class="dashboard-card-icon">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <h4>Start a Debate</h4>
+                            <p>Create a new debate room and invite participants.</p>
+                            <a href="debate.html" class="btn btn-primary">Create Room</a>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+     
+            if (!window.authUtils.checkAuth()) {
+                return; 
+            }
+        
+            const userString = localStorage.getItem('dialectica_user');
+            
+
+            if (userString) {
+                try {
+                    const user = JSON.parse(userString);
+                    if (user && user.username) {
+                        document.getElementById('welcomeUser').textContent = user.username;
+                        document.getElementById('welcomeHeader').textContent = `Welcome, ${user.username}!`;
+                        
+
+                        if (user.isAdmin) {
+                            const adminLink = document.querySelector('.admin-link');
+                            if (adminLink) {
+                                adminLink.style.display = 'block';
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                }
+            }
+            
+
+            fetchUserProfile();
+            
+
+            fetchUserStats();
+            
+
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('dialectica_token');
+                    localStorage.removeItem('dialectica_user');
+
+                    alert('You have been logged out successfully');
+
+                    window.location.href = 'index.html';
+                });
+            }
+
+            async function fetchUserProfile() {
+                try {
+                    const token = localStorage.getItem('dialectica_token');
+                    if (!token) return;
+                    
+                    const response = await fetch('http://localhost:5000/api/profile', {
+                        method: 'GET',
+                        headers: {
+                            'x-auth-token': token,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user profile');
+                    }
+                    
+                    const userData = await response.json();
+
+                    if (userData.username) {
+                        document.getElementById('welcomeUser').textContent = userData.username;
+                        document.getElementById('welcomeHeader').textContent = `Welcome, ${userData.username}!`;
+                    }
+
+                    if (userData.avatar) {
+                        updateNavAvatar(userData.avatar);
+                    }
+                } catch (error) {
+                    console.error('Error fetching user profile:', error);
+                }
+            }
+
+            function updateNavAvatar(avatarSrc) {
+                const navProfileAvatar = document.getElementById('navProfileAvatar');
+                navProfileAvatar.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = avatarSrc;
+                img.alt = 'Profile Avatar';
+                navProfileAvatar.appendChild(img);
+            }
+
+            async function fetchUserStats() {
+                try {
+                    const token = localStorage.getItem('dialectica_token');
+                    if (!token) return;
+                    
+                    const response = await fetch('http://localhost:5000/api/stats', {
+                        method: 'GET',
+                        headers: {
+                            'x-auth-token': token,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user statistics');
+                    }
+                    
+                    const stats = await response.json();
+  
+                    document.getElementById('debatesParticipated').textContent = stats.debatesParticipated || 0;
+                    document.getElementById('debatesWon').textContent = stats.debatesWon || 0;
+                    document.getElementById('debatesHosted').textContent = stats.debatesHosted || 0;
+                    document.getElementById('feedbackReceived').textContent = stats.feedbackReceived || 0;
+   
+                    const totalSeconds = stats.totalSpeakingTime || 0;
+                    const minutes = Math.floor(totalSeconds / 60);
+                    const seconds = totalSeconds % 60;
+                    document.getElementById('totalSpeakingTime').textContent = 
+                        `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    updateRecentDebatesList(stats.recentDebates || []);
+                } catch (error) {
+                    console.error('Error fetching user statistics:', error);
+                }
+            }
+  
+            function updateRecentDebatesList(debates) {
+                const recentDebatesList = document.getElementById('recentDebatesList');
+                
+                if (debates.length === 0) {
+                    return;
+                }
+
+                recentDebatesList.innerHTML = '';
+
+                debates.forEach(debate => {
+                    const date = new Date(debate.date);
+                    const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    
+                    const debateItem = document.createElement('div');
+                    debateItem.className = 'debate-item';
+                    debateItem.innerHTML = `
+                        <div class="debate-title">${debate.title || 'Untitled Debate'}</div>
+                        <div class="debate-meta">
+                            <span class="text-muted">${formattedDate}</span>
+                            <span class="badge ${getBadgeClassForRole(debate.role)}">${debate.role}</span>
+                        </div>
+                    `;
+                    
+                    recentDebatesList.appendChild(debateItem);
+                });
+            }
+ 
+            function getBadgeClassForRole(role) {
+                switch(role) {
+                    case 'moderator': return 'bg-primary';
+                    case 'debater': return 'bg-success';
+                    case 'spectator': return 'bg-secondary';
+                    default: return 'bg-info';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

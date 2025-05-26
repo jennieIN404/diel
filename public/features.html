@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000; connect-src 'self' http://localhost:5000; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Features - Dialectica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Platform Features</h1>
+                    <p class="lead">Everything you need for professional, structured debates in one powerful platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="features-main py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="feature-large">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Real-time Debates</h3>
+                        <p>Engage in structured debates with real-time video and audio communication. Our platform provides crystal-clear video streaming with minimal latency, ensuring that the debate flows naturally.</p>
+                        <ul class="feature-list">
+                            <li>HD video and audio quality</li>
+                            <li>Low-latency streaming</li>
+                            <li>Automatic bandwidth adjustment</li>
+                            <li>Background noise suppression</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-large">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3>Speech-to-Text</h3>
+                        <p>Automatically convert spoken arguments into text transcripts for reference. Our advanced speech recognition technology works in real-time to provide accurate transcriptions of every debate.</p>
+                        <ul class="feature-list">
+                            <li>Real-time transcription</li>
+                            <li>Support for multiple languages</li>
+                            <li>Searchable debate archives</li>
+                            <li>Downloadable transcripts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="feature-large">
+                        <div class="feature-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Professional Judging</h3>
+                        <p>Get feedback and evaluations from qualified judges based on debate performance. Our judging system includes customizable rubrics and detailed feedback mechanisms.</p>
+                        <ul class="feature-list">
+                            <li>Customizable scoring rubrics</li>
+                            <li>Detailed feedback forms</li>
+                            <li>Private judge deliberation rooms</li>
+                            <li>Performance analytics</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="feature-large">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Timed Sessions</h3>
+                        <p>Keep debates structured with customizable time limits and automatic notifications. Our timing system ensures fair speaking time for all participants.</p>
+                        <ul class="feature-list">
+                            <li>Customizable time limits</li>
+                            <li>Visual and audio notifications</li>
+                            <li>Automatic speaker transitions</li>
+                            <li>Time usage analytics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Audience Participation</h3>
+                        <p>Engage viewers with polls, Q&A, and live reactions during debates.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Moderation Tools</h3>
+                        <p>Powerful controls for moderators to ensure civil and productive discourse.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Performance Analytics</h3>
+                        <p>Track improvement over time with detailed performance metrics and feedback history.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Chat Assistant</h3>
+                        <p>Get instant help with our AI chatbot for platform questions and debate guidance.</p>
+                        <button id="openChatBtn" class="btn btn-sm btn-outline-primary mt-2">Try It Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="debate-formats py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Supported Debate Formats</h2>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="format-card">
+                        <h3>Lincoln-Douglas</h3>
+                        <p>One-on-one value debate with alternating constructive speeches, rebuttals, and cross-examinations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="format-card">
+                        <h3>Policy Debate</h3>
+                        <p>Team-based, research-intensive format focusing on policy proposals and their implications.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="format-card">
+                        <h3>Parliamentary</h3>
+                        <p>British or World Schools format with government and opposition teams debating impromptu motions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="format-card">
+                        <h3>Public Forum</h3>
+                        <p>Accessible format designed for public audiences with shorter speeches and simplified rules.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p>Need a custom format? Our platform supports fully customizable debate structures.</p>
+                <a href="contact.html" class="btn btn-outline-primary">Contact Us for Custom Solutions</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="integrations py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Seamless Integrations</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="integration-list">
+                        <div class="integration-item">
+                            <div class="integration-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="integration-content">
+                                <h4>Google Workspace</h4>
+                                <p>Single sign-on, calendar integration, and Google Drive export capabilities.</p>
+                            </div>
+                        </div>
+                        <div class="integration-item">
+                            <div class="integration-icon">
+                                <i class="fab fa-slack"></i>
+                            </div>
+                            <div class="integration-content">
+                                <h4>Slack</h4>
+                                <p>Receive notifications and share debate results directly in your team channels.</p>
+                            </div>
+                        </div>
+                        <div class="integration-item">
+                            <div class="integration-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="integration-content">
+                                <h4>LMS Systems</h4>
+                                <p>Integrate with Canvas, Blackboard, and other learning management systems.</p>
+                            </div>
+                        </div>
+                        <div class="integration-item">
+                            <div class="integration-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="integration-content">
+                                <h4>Calendar Apps</h4>
+                                <p>Sync debate schedules with Google Calendar, Outlook, and Apple Calendar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2>Ready to elevate your debate experience?</h2>
+                        <p>Join thousands of debaters, judges, and educators using Dialectica to structure meaningful discourse in a professional environment.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                        <a href="signup.html" class="btn btn-primary me-2 mb-2">Sign Up Now <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="login.html" class="btn btn-outline-light mb-2">Try Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">
+                        <div class="logo-container">
+                            <div class="logo-shape shape-1"></div>
+                            <div class="logo-shape shape-2"></div>
+                        </div>
+                        <span class="ms-2">Dialectica</span>
+                    </div>
+                    <p class="footer-tagline">Where Reason Resonates</p>
+                    <p>Dialectica is a professional debate platform designed to facilitate structured intellectual discourse in a respectful environment.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright">© 2025 Dialectica. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div id="chatContainer" class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot me-2"></i> Dialectica Assistant
+            </div>
+            <button id="closeChatBtn" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    Hello! I'm the Dialectica AI assistant. How can I help you with your debate platform questions today?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your message here...">
+            <button id="sendMessageBtn" class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <style>
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background-color: #0d6efd;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .send-btn {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background-color: #f1f1f1;
+            border-radius: 18px;
+            align-self: flex-start;
+            margin-bottom: 5px;
+        }
+        
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #666;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: typing 1s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+  
+        .chat-container[style*="flex"] ~ .floating-chat-btn {
+            display: none;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/help.js"></script>
+</body>
+</html>

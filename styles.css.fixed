@@ -1,0 +1,8 @@
+.testimonial-content::before {
+    content: """;
+    font-size: 3rem;
+    color: rgba(23, 162, 184, 0.2);
+    position: absolute;
+    left: -10px;
+    top: -20px;
+}

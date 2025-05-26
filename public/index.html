@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <title>Dialectica - Where Reason Resonates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div class="logo-container">
+                    <div class="logo-shape shape-1"></div>
+                    <div class="logo-shape shape-2"></div>
+                </div>
+                <span class="ms-2 brand-text">Dialectica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex" id="authButtons">
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Where Reason <span class="text-primary">Resonates</span></h1>
+                    <p class="lead mb-4">Dialectica provides a professional platform for structured debates, with powerful tools for moderation, judging, and feedback.</p>
+                    <div class="d-flex flex-wrap">
+                        <a href="signup.html" class="btn btn-primary me-3 mb-3">
+                            Get Started <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-secondary mb-3">Meet Our Team</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-quote">
+                        <p>"The test of a first-rate intelligence is the ability to hold two opposing ideas in mind at the same time and still retain the ability to function."</p>
+                        <footer>— F. Scott Fitzgerald</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="text-center mb-2">Key Features</h2>
+            <p class="text-center mb-5">Everything you need for professional, structured debates</p>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Real-time Debates</h3>
+                        <p>Engage in structured debates with real-time video and audio communication.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3>Speech-to-Text</h3>
+                        <p>Automatically convert spoken arguments into text transcripts for reference.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Professional Judging</h3>
+                        <p>Get feedback and evaluations from qualified judges based on debate performance.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-container">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Timed Sessions</h3>
+                        <p>Keep debates structured with customizable time limits and automatic notifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="text-center mb-2">How It Works</h2>
+            <p class="text-center mb-5">Simple steps to start your structured debate experience</p>
+            
+            <div class="steps-container">
+                <div class="step-line"></div>
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Create Account</h3>
+                            <p>Sign up and create your debater profile</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Set up Debate</h3>
+                            <p>Create a debate room or join an existing one</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Invite Participants</h3>
+                            <p>Share link and room-code with opponents, judges and audience</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h3>Start Debating</h3>
+                            <p>Engage in structured discourse with real-time feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2>Ready to elevate your debate experience?</h2>
+                        <p>Join thousands of debaters, judges, and educators using Dialectica to structure meaningful discourse in a professional environment.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                        <a href="signup.html" class="btn btn-primary me-2 mb-2">Sign Up Now <i class="fas fa-arrow-right ms-2"></i></a>
+                        <a href="features.html" class="btn btn-outline-light mb-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-logo">
+                        <div class="logo-container">
+                            <div class="logo-shape shape-1"></div>
+                            <div class="logo-shape shape-2"></div>
+                        </div>
+                        <span class="ms-2">Dialectica</span>
+                    </div>
+                    <p class="footer-tagline">Where Reason Resonates</p>
+                    <p>Dialectica is a professional debate platform designed to facilitate structured intellectual discourse in a respectful environment.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright"> 2025 Dialectica. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('dialectica_token');
+            const userString = localStorage.getItem('dialectica_user');
+            
+            if (token && userString && userString !== 'undefined') {
+                try {
+                    const user = JSON.parse(userString);
+                    if (!user) {
+                   
+                        localStorage.removeItem('dialectica_token');
+                        localStorage.removeItem('dialectica_user');
+                        return;
+                    }
+                    
+
+                    const authButtons = document.getElementById('authButtons');
+                    const userProfile = document.getElementById('userProfile');
+                    const welcomeUser = document.getElementById('welcomeUser');
+                    
+                    if (authButtons) authButtons.style.display = 'none';
+                    if (userProfile) userProfile.style.display = 'flex';
+                    if (welcomeUser && user && user.username) welcomeUser.textContent = `Welcome, ${user.username}`;
+                    
+
+                    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+
+                        const dashboardLinksContainer = document.createElement('div');
+                        dashboardLinksContainer.className = 'dashboard-links-container mt-3';
+                        dashboardLinksContainer.style.textAlign = 'center';
+
+                        let dashboardHtml = '<p>Welcome back! Choose your destination:</p>';
+
+                        if (user && user.email && (user.email === 'dialectica91@gmail.com' || user.email === 'ojha13291@gmail.com')) {
+
+                            user.isAdmin = true;
+                            localStorage.setItem('dialectica_user', JSON.stringify(user));
+                            console.log('Admin status set to true for:', user.email);
+                            
+                            dashboardHtml += `
+                                <a href="admin.html" class="btn btn-primary me-2">Admin Dashboard</a>
+                                <a href="dashboard.html" class="btn btn-outline-secondary">User Dashboard</a>
+                            `;
+                        } else {
+                            dashboardHtml += `
+                                <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+                            `;
+                        }
+
+                        dashboardLinksContainer.innerHTML = dashboardHtml;
+
+                        const heroSection = document.querySelector('.hero');
+                        if (heroSection) {
+                            heroSection.prepend(dashboardLinksContainer);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+               
+                    localStorage.removeItem('dialectica_token');
+                    localStorage.removeItem('dialectica_user');
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
