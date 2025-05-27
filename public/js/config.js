@@ -1,10 +1,12 @@
 const config = {
-  // Render deployment URL
-  apiBaseUrl: 'https://dialectica.onrender.com',
+ apiBaseUrl: window.API_BASE_URL || 'https://dielectica-live.onrender.com',
   
-  socketUrl: 'https://dialectica.onrender.com',
+
+  get socketUrl() {
+    return this.apiBaseUrl;
+  },
   
-  // Socket.io connection options optimized for Render
+
   socketOptions: {
     transports: ['websocket', 'polling'],
     reconnection: true,
@@ -15,5 +17,7 @@ const config = {
     path: '/socket.io'
   }
 };
+
+console.log('App config initialized:', config);
 
 window.appConfig = config;

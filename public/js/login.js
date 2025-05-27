@@ -15,27 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    // Special admin access check
+
     if (password === '9006' && (email === 'dialectica91@gmail.com' || email === 'ojha13291@gmail.com' || email === 'Johnripper579@gmail.com')) {
-      // Create a temporary admin token
+    
       const tempAdminToken = 'admin_' + Date.now();
       localStorage.setItem('dialectica_token', tempAdminToken);
       
-      // Create admin user object
+    
       const adminUser = {
         email: email,
         username: email.split('@')[0],
         isAdmin: true
       };
       localStorage.setItem('dialectica_user', JSON.stringify(adminUser));
-      
-      // Redirect to admin dashboard
+    
       window.location.href = 'admin.html';
       return;
     }
     
     try {
-      const apiBaseUrl = 'https://dialectica.onrender.com';
+
+      const apiBaseUrl = window.appConfig ? window.appConfig.apiBaseUrl : 'https://dielectica-live.onrender.com';
+      console.log('Using API URL for login:', apiBaseUrl);
+   
+      const requestData = { email, password: password ? '****' : undefined };
+      console.log('Login request data:', requestData);
+      
       const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -50,9 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       const data = await response.json();
+      console.log('Login response:', data);
       
       if (!response.ok) {
-        showAlert(data.msg || 'Login failed. Please check your credentials.', 'danger');
+        if (data.errors && Array.isArray(data.errors)) {
+    
+          const errorMessages = data.errors.map(err => err.msg).join('<br>');
+          showAlert(errorMessages, 'danger');
+        } else {
+          showAlert(data.msg || 'Login failed. Please try again.', 'danger');
+        }
         return;
       }
       
