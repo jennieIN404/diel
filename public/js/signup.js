@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     try {
-      const apiBaseUrl = 'https://dialectica.onrender.com';
+
+      const apiBaseUrl = window.appConfig ? window.appConfig.apiBaseUrl : 'https://dielectica-live.onrender.com';
+      console.log('Using API URL for registration:', apiBaseUrl);
       const response = await fetch(`${apiBaseUrl}/api/auth/register`, {
         method: 'POST',
         headers: {

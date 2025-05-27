@@ -22,17 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return null;
         }
         
-        // Check if this is a special admin token (starts with 'admin_')
         if (token.startsWith('admin_')) {
-            // For special admin tokens, we'll create a dummy socket that doesn't actually connect
-            // This prevents authentication errors for admin users using the special password
             console.log('Using special admin token, creating mock socket');
             return createMockSocket();
         }
         
-        const socketUrl = window.appConfig ? window.appConfig.socketUrl : 'http://localhost:5000';
-        
-        // Get Socket.io options from config if available
+        const socketUrl = window.appConfig ? window.appConfig.socketUrl : 'https://dielectica-live.onrender.com';
+     
         const socketOptions = window.appConfig && window.appConfig.socketOptions ? 
             window.appConfig.socketOptions : {
                 transports: ['websocket', 'polling'],
@@ -42,12 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 timeout: 20000
             };
             
-        // Add auth token to options
+
         socketOptions.auth = {
             token: token
         };
         
-        // Initialize Socket.io with the URL and options
         const socket = io(socketUrl, socketOptions);
         
         socket.on('connect_error', (err) => {
@@ -85,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const adminPages = ['admin.html', 'admin-dashboard.html'];
         const currentPage = window.location.pathname.split('/').pop();
         
-        // Check for special admin token
+     
         const token = localStorage.getItem('dialectica_token');
         if (token && token.startsWith('admin_')) {
-            return true; // Special admin token grants immediate access
+            return true; 
         }
         
         if (adminPages.includes(currentPage) && !isAdmin()) {
@@ -100,11 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
     
-    // Create a mock socket for special admin tokens
+
     function createMockSocket() {
         const mockSocket = {
             on: function(event, callback) {
-                // Store callbacks but don't execute them
+              
                 return this;
             },
             emit: function(event, data) {

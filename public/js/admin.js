@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return getMockDataForEndpoint(url);
         }
     
-        const apiBaseUrl = 'https://dialectica.onrender.com';
+        const apiBaseUrl = window.API_BASE_URL || 'https://dielectica-live.onrender.com';
         const fullUrl = url.startsWith('http') ? url : `${apiBaseUrl}${url}`;
 
         const headers = {
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showBlockUserModal(userId) {
-        // Create a modal to confirm blocking and collect reason
+        
         const blockModalHtml = `
             <div class="modal fade" id="blockUserConfirmModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog">
@@ -716,11 +716,11 @@ document.addEventListener('DOMContentLoaded', function() {
         loadActivityLogs();
     });
 
-    // Function to return mock data for admin endpoints when using special admin token
+
     function getMockDataForEndpoint(url) {
         console.log('Returning mock data for:', url);
         
-        // Mock data for different endpoints
+      
         if (url.includes('/api/admin/stats')) {
             return {
                 totalUsers: 125,
@@ -830,7 +830,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return logs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         }
         
-        // Default empty response
+       
         return [];
     }
     

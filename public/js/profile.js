@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         };
         
         try {
-            const apiBaseUrl = 'https://dialectica.onrender.com';
+            const apiBaseUrl = window.API_BASE_URL || 'https://dielectica-live.onrender.com';
             const response = await fetch(`${apiBaseUrl}/api/profile`, {
                 method: 'PUT',
                 headers: {
@@ -98,7 +98,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             updateAvatarPreview(base64Image);
             
-            const response = await fetch('https://dialectica.onrender.com/api/profile/avatar', {
+            // Use a fixed localhost URL for local development
+            const apiBaseUrl = 'http://localhost:5000';
+            console.log('Using API URL for avatar update:', apiBaseUrl);
+            
+            const response = await fetch(`${apiBaseUrl}/api/profile/avatar`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +131,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
     
     async function fetchProfileData() {
-        const apiBaseUrl = 'https://dialectica.onrender.com';
+        // Use a fixed localhost URL for local development
+        const apiBaseUrl = 'http://localhost:5000';
+        console.log('Using API URL for profile data:', apiBaseUrl);
+        
         const response = await fetch(`${apiBaseUrl}/api/profile`, {
             method: 'GET',
             headers: {
@@ -146,7 +153,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     async function fetchUserStats() {
         try {
-            const apiBaseUrl = 'https://dialectica.onrender.com';
+            // Use a fixed localhost URL for local development
+            const apiBaseUrl = 'http://localhost:5000';
+            console.log('Using API URL for user stats:', apiBaseUrl);
+            
             const response = await fetch(`${apiBaseUrl}/api/stats`, {
                 method: 'GET',
                 headers: {

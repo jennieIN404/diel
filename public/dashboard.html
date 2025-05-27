@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: http://localhost:5000 https://dialectica.onrender.com https://dielectica-live.onrender.com; connect-src 'self' http://localhost:5000 ws://localhost:5000 https://dialectica.onrender.com wss://dialectica.onrender.com https://dielectica-live.onrender.com wss://dielectica-live.onrender.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://dialectica.onrender.com https://dielectica-live.onrender.com/socket.io/socket.io.js https://dielectica-live.onrender.com https://dielectica-live.onrender.com/socket.io/socket.io.js; img-src 'self' data: https://via.placeholder.com https://upload.wikimedia.org https://*.placeholder.com;">
     <title>Dialectica - User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -244,6 +244,8 @@
         </div>
     </div>
 
+    <script src="js/api-config.js"></script>
+    <script src="js/local-socket-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/auth.js"></script>
@@ -254,27 +256,35 @@
                 return; 
             }
         
+            // Get user data from localStorage with proper error handling
             const userString = localStorage.getItem('dialectica_user');
+            let user = null;
             
-
-            if (userString) {
+            // Only try to parse if userString is not null or undefined
+            if (userString && userString !== 'undefined') {
                 try {
-                    const user = JSON.parse(userString);
+                    user = JSON.parse(userString);
                     if (user && user.username) {
                         document.getElementById('welcomeUser').textContent = user.username;
                         document.getElementById('welcomeHeader').textContent = `Welcome, ${user.username}!`;
                         
-
+                        // Show admin link if user is admin
                         if (user.isAdmin) {
                             const adminLink = document.querySelector('.admin-link');
                             if (adminLink) {
                                 adminLink.style.display = 'block';
                             }
                         }
+                    } else {
+                        console.log('User data found but missing username');
                     }
                 } catch (e) {
                     console.error('Error parsing user data:', e);
+                    // Clear invalid data
+                    localStorage.removeItem('dialectica_user');
                 }
+            } else {
+                console.log('No user data found in localStorage or data is invalid');
             }
             
 
@@ -299,21 +309,30 @@
             async function fetchUserProfile() {
                 try {
                     const token = localStorage.getItem('dialectica_token');
-                    if (!token) return;
+                    if (!token) {
+                        console.log('No authentication token found');
+                        return;
+                    }
                     
-                    const response = await fetch('http://localhost:5000/api/profile', {
+                    // Always use localhost:5000 for local development
+                    const apiBaseUrl = 'http://localhost:5000';
+                    console.log('Using API URL for profile:', apiBaseUrl);
+                    
+                    const response = await fetch(`${apiBaseUrl}/api/profile`, {
                         method: 'GET',
                         headers: {
                             'x-auth-token': token,
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        credentials: 'include'
                     });
                     
                     if (!response.ok) {
-                        throw new Error('Failed to fetch user profile');
+                        throw new Error(`Failed to fetch user profile: ${response.status} ${response.statusText}`);
                     }
                     
                     const userData = await response.json();
+                    console.log('User profile data received:', userData);
 
                     if (userData.username) {
                         document.getElementById('welcomeUser').textContent = userData.username;
@@ -340,21 +359,30 @@
             async function fetchUserStats() {
                 try {
                     const token = localStorage.getItem('dialectica_token');
-                    if (!token) return;
+                    if (!token) {
+                        console.log('No authentication token found for stats');
+                        return;
+                    }
                     
-                    const response = await fetch('http://localhost:5000/api/stats', {
+                    // Always use localhost:5000 for local development
+                    const apiBaseUrl = 'http://localhost:5000';
+                    console.log('Using API URL for stats:', apiBaseUrl);
+                    
+                    const response = await fetch(`${apiBaseUrl}/api/stats`, {
                         method: 'GET',
                         headers: {
                             'x-auth-token': token,
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        credentials: 'include'
                     });
                     
                     if (!response.ok) {
-                        throw new Error('Failed to fetch user statistics');
+                        throw new Error(`Failed to fetch user statistics: ${response.status} ${response.statusText}`);
                     }
                     
                     const stats = await response.json();
+                    console.log('User stats received:', stats);
   
                     document.getElementById('debatesParticipated').textContent = stats.debatesParticipated || 0;
                     document.getElementById('debatesWon').textContent = stats.debatesWon || 0;

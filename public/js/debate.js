@@ -263,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function toggleMicrophone() {
         if (!isMicActive) {
-            // If first time, set up audio
             if (!audioContext) {
                 const success = await setupAudio();
                 if (!success) return;
@@ -799,7 +798,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const speakingTime = role === 'debater' ? 300 : 0; 
             
-            const response = await fetch('http://localhost:5000/api/stats/debate', {
+            const apiBaseUrl = window.appConfig ? window.appConfig.apiBaseUrl : 'https://dielectica-live.onrender.com';
+            const response = await fetch(`${apiBaseUrl}/api/stats/debate`, {
                 method: 'PUT',
                 headers: {
                     'x-auth-token': token,
@@ -883,7 +883,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = buffer.getChannelData(0);
             
             for (let i = 0; i < bufferSize; i++) {
-                // Create a pattern of beeps
                 const t = i / fallbackContext.sampleRate;
                 const isBeeping = Math.floor(t * 4) % 2 === 0;
                 if (isBeeping) {
