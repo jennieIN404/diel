@@ -64,10 +64,10 @@ For the database, MongoDB Atlas provides a free tier that works well with this a
 Boost Software License - Version 1.0 - August 17th, 2003
 
 
-## Contributing
+# Contributing
 We welcome contributions to CreateMVP! Here's how you can contribute:
 
--General Contributions
+## General Contributions
 
 1. Fork the repository
 2. Create a new branch for your feature (git checkout -b feature/amazing-feature)
