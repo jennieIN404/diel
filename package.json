@@ -16,7 +16,7 @@
     "express-validator": "^7.2.1",
     "glob": "^11.0.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.1.1",
+    "mongoose": "^8.9.5",
     "socket.io": "^4.7.2",
     "socket.io-stream": "^0.9.1"
   },
