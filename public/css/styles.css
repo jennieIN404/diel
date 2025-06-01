@@ -915,6 +915,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     z-index: 10;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
 }
 
 .form-switch .form-check-input {
@@ -939,11 +940,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .pricing-card.popular {
     border: 2px solid var(--accent);
-    transform: scale(1.05);
+    transform: scale(1.02); 
+    margin: 0 10px; 
 }
 
 .pricing-card.popular:hover {
-    transform: scale(1.05) translateY(-10px);
+    transform: scale(1.02) translateY(-10px); 
 }
 
 .popular-badge {
