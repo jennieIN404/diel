@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 
 :root {
     --primary: #0b2d5c;
