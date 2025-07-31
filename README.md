@@ -74,3 +74,8 @@ We welcome contributions to CreateMVP! Here's how you can contribute:
 3. Commit your changes (git commit -m 'Add some amazing feature')
 4. Push to the branch (git push origin feature/amazing-feature)
 5. Open a Pull Request
+
+## Discord Server
+GSSoC 25 contributors and mentors . please join my dc server for better coordination and communication .
+
+link : https://discord.com/channels/1400498631848624208/1400498632653934718
