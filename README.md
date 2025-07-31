@@ -78,4 +78,4 @@ We welcome contributions to CreateMVP! Here's how you can contribute:
 ## Discord Server
 GSSoC 25 contributors and mentors . please join my dc server for better coordination and communication .
 
-link : https://discord.com/channels/1400498631848624208/1400498632653934718
+link : https://discord.gg/uc2AHnBd
