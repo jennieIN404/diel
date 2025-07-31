@@ -55,10 +55,14 @@ router.post('/register', [
       process.env.JWT_SECRET,
       { expiresIn: '7d' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT signing error:', err);
+          return res.status(500).json({msg: 'Token generation failed'});
+        }
         res.json({ token });
       }
     );
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -101,7 +105,10 @@ router.post('/login', [
       process.env.JWT_SECRET,
       { expiresIn: '7d' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT signing error:' , err);
+          return res.status(500).json({msg: 'Token generation failed'})
+        }
         res.json({ 
           token,
           user: {
